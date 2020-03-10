@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>PrimeFlix - Manage user</title>
+</h:head>
+<h:body>
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Managed user's account</h1>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+
+
+		<b:row>
+
+			<b:column>
+
+				<!--  ajout user/admin -->
+				<h:form>
+					<legend style="color: white; font-weight: bold;">Add
+						User</legend>
+					<!-- 		<h:outputLabel value="Name : " style="color:white"></h:outputLabel> -->
+					<p:outputLabel value="Name :" style="color:white" />
+					<!-- 		<h:inputText id="add_name" value="#{userMB.nom}"></h:inputText> -->
+					<p:autoComplete id="add_name" value="#{userMB.nom}"
+						style="margin-left:20px" />
+					<br></br>
+					<br></br>
+					<!-- 		<h:outputLabel value="Email : " style="color:white"></h:outputLabel> -->
+					<p:outputLabel value="Email :" style="color:white" />
+					<!-- 		<h:inputText id="add_email" value="#{userMB.email}" required="true" -->
+					<!-- 			requiredMessage="It must be completed !"></h:inputText> -->
+					<p:autoComplete id="add_email" value="#{userMB.email}"
+						style="margin-left:20px" requiredMessage="It must be completed !"
+						required="true" />
+					<h:message for="add_email" style="color:white"></h:message>
+					<br></br>
+					<br></br>
+<!-- 					<h:outputLabel value="Password : " style="color:white"></h:outputLabel> -->
+<p:outputLabel value="Password :" style="color:white" />
+<!-- 					<h:inputText id="add_password" value="#{userMB.pwd}" -->
+<!-- 						required="true" requiredMessage="It must be completed !"></h:inputText> -->
+<p:autoComplete id="add_password" value="#{userMB.pwd}"
+						style="margin-left:20px" requiredMessage="It must be completed !"
+						required="true" />s
+					<h:message for="add_password" style="color:white"></h:message>
+					<br></br>
+					<br></br>
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="add_role" value="Type of account :"
+							style="color:white" />
+						<p:selectOneRadio id="add_role" value="#{userMB.role}"
+							style="color:white" unselectable="true" required="true"
+							requiredMessage="It must be completed !">
+							<h:message for="add_role" style="color:red"></h:message>
+							<f:selectItem itemLabel="User" itemValue="USER" />
+							<f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+						</p:selectOneRadio>
+					</h:panelGrid>
+<br></br>
+
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel for="add_activated" value="Activate ?"
+							style="color:white" />
+						<p:selectOneRadio id="add_activated" value="#{userMB.activated}"
+							style="color:white" unselectable="true" required="true"
+							requiredMessage="It must be completed !">
+							<h:message for="add_activated" style="color:red"></h:message>
+							<f:selectItem itemLabel="Yes" itemValue="true"
+								style="color:white" />
+							<f:selectItem itemLabel="No" itemValue="false"
+								style="color:white" />
+						</p:selectOneRadio>
+					</h:panelGrid>
+					<br></br>
+					<h:commandButton action="#{userMB.addUser}" value="Send request"
+						style="color:black;"></h:commandButton>
+				</h:form>
+
+				<br></br>
+				<h:outputText style="#{userMB.style}" value="#{userMB.message}"></h:outputText>
+				<br></br>
+				<!-- end add user/admin -->
+
+				<br></br>
+				<br></br>
+
+
+
+
+				<!-- print admin'slist -->
+				<h:form>
+					<legend style="color: white; font-weight: bold;">Admin List</legend>
+					<h:commandButton value="Show List"
+						action="#{userMB.printAdminsList}" style="color:black;"
+						rendered="#{userMB.see ne 'adminList'}"></h:commandButton>
+					<h:commandButton value="Close me !" action="#{userMB.closeList}"
+						style="color:red;" rendered="#{userMB.see eq 'adminList'}"></h:commandButton>
+				</h:form>
+				<br></br>
+
+				<h:form id="adminList">
+					<p:dataTable id="admin" value="#{userMB.adminsList}" var="x"
+						style="color:white" rendered="#{userMB.see eq 'adminList'}"
+						rowKey="#{x.id}" selection="#{userMB.selectedUser}"
+						selectionMode="single">
+						<f:facet name="header">
+            RightClick to View Options
+        </f:facet>
+						<p:column headerText="Id">
+							<h:outputLabel value="#{x.id}" />
+						</p:column>
+
+						<p:column headerText="Name">
+							<h:outputLabel value="#{x.nom}" />
+						</p:column>
+
+						<p:column headerText="Email">
+							<h:outputLabel value="#{x.email}" />
+						</p:column>
+						<p:column headerText="Password">
+							<h:outputLabel value="#{x.pwd}"></h:outputLabel>
+						</p:column>
+						<p:column headerText="Role">
+							<h:outputLabel value="#{x.role}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+						<p:column headerText="Activated">
+							<h:outputLabel value="#{x.activated}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+
+					</p:dataTable>
+
+					<p:contextMenu for="admin">
+						<p:menuitem value="Update" update="userDetail"
+							oncomplete="PF('dlgadmin').show()" />
+						<p:menuitem value="Delete" update="admin"
+							action="#{userMB.deleteUser}" />
+					</p:contextMenu>
+
+
+
+					<!-- 	modal update ADMIN -->
+					<p:dialog header="Update" widgetVar="dlgadmin" modal="true"
+						height="100%">
+
+						<p:outputPanel id="userDetail" style="margin-top:10px;border:none">
+
+							<h:panelGrid>
+								<h:form>
+									<p:outputLabel style="margin-top:10px" for="update_name"
+										value="Name : " />
+									<p:inputText style="margin-top:10px" id="update_name"
+										value="#{userMB.selectedUser.nom}" />
+
+									<br></br>
+
+									<p:outputLabel style="margin-top:10px" for="update_email"
+										value="Email : " />
+									<p:inputText style="margin-top:10px" id="update_email"
+										value="#{userMB.selectedUser.email}" />
+
+									<br></br>
+
+									<p:outputLabel style="margin-top:10px" for="update_password"
+										value="Password : " />
+									<p:inputText style="margin-top:10px" id="update_password"
+										value="#{userMB.selectedUser.pwd}" />
+
+									<br></br>
+									<br></br>
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel for="add_role" value="Type of account :" />
+										<p:selectOneRadio id="add_role"
+											value="#{userMB.selectedUser.role}" sunselectable="true"
+											required="true" requiredMessage="It must be completed !">
+											<h:message for="add_role" style="color:red"></h:message>
+											<f:selectItem itemLabel="User" itemValue="USER" />
+											<f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<br></br>
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel for="add_activated" value="Activate ?" />
+										<p:selectOneRadio id="add_activated"
+											value="#{userMB.selectedUser.activated}" unselectable="true"
+											required="true" requiredMessage="It must be completed !">
+											<h:message for="add_activated" style="color:red"></h:message>
+											<f:selectItem itemLabel="Yes" itemValue="true" />
+											<f:selectItem itemLabel="No" itemValue="false" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<br></br>
+
+									<p:commandButton style="margin-top:10px" value="Update"
+										onclick="PF('dlgadmin').hide();" action="#{userMB.updateUser}">
+									</p:commandButton>
+								</h:form>
+							</h:panelGrid>
+
+						</p:outputPanel>
+					</p:dialog>
+
+				</h:form>
+				<!--  end print admin's list -->
+
+
+
+
+				<br></br>
+				<br></br>
+
+
+				<!--print user's list -->
+				<h:form>
+					<legend style="color: white; font-weight: bold;"> List of
+						users</legend>
+					<h:commandButton value="Show List"
+						action="#{userMB.printUsersList}" style="color:black;"
+						rendered="#{userMB.see  ne 'userList'}"></h:commandButton>
+					<h:commandButton value="Close me !" action="#{userMB.closeList}"
+						style="color:red;" rendered="#{userMB.see eq 'userList'}"></h:commandButton>
+				</h:form>
+				<br></br>
+				<h:form id="userList">
+					<p:dataTable id="user" value="#{userMB.usersList}" var="x"
+						rendered="#{userMB.see eq 'userList'}" rowKey="#{x.id}"
+						selection="#{userMB.selectedUser}" selectionMode="single">
+						<f:facet name="header">
+            RightClick to View Options
+        </f:facet>
+						<p:column headerText="Id">
+							<h:outputLabel value="#{x.id}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+						<p:column headerText="Name">
+							<h:outputLabel value="#{x.nom}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+						<p:column headerText="Email">
+							<h:outputLabel value="#{x.email}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+						<p:column headerText="Password">
+							<h:outputLabel value="#{x.pwd}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+						<p:column headerText="Role">
+							<h:outputLabel value="#{x.role}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+						<p:column headerText="Activated">
+							<h:outputLabel value="#{x.activated}"></h:outputLabel>
+						</p:column>
+						<br></br>
+						<br></br>
+					</p:dataTable>
+
+					<p:contextMenu for="user">
+						<p:menuitem value="Update" update="userDetail"
+							oncomplete="PF('dlguser').show()" />
+						<p:menuitem value="Delete" update="user"
+							action="#{userMB.deleteUser}" />
+					</p:contextMenu>
+
+
+
+					<!-- 	modal update user -->
+					<p:dialog header="Update" widgetVar="dlguser" modal="true"
+						height="100%">
+
+						<p:outputPanel id="userDetail" style="margin-top:10px;border:none">
+
+							<h:panelGrid>
+								<h:form>
+									<p:outputLabel style="margin-top:10px" for="update_name"
+										value="Name : " />
+									<p:inputText style="margin-top:10px" id="update_name"
+										value="#{userMB.selectedUser.nom}" />
+
+									<br></br>
+
+									<p:outputLabel style="margin-top:10px" for="update_email"
+										value="Email : " />
+									<p:inputText style="margin-top:10px" id="update_email"
+										value="#{userMB.selectedUser.email}" />
+
+									<br></br>
+
+									<p:outputLabel style="margin-top:10px" for="update_password"
+										value="Password : " />
+									<p:inputText style="margin-top:10px" id="update_password"
+										value="#{userMB.selectedUser.pwd}" />
+
+									<br></br>
+									<br></br>
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel for="add_role" value="Type of account :" />
+										<p:selectOneRadio id="add_role"
+											value="#{userMB.selectedUser.role}" sunselectable="true"
+											required="true" requiredMessage="It must be completed !">
+											<h:message for="add_role" style="color:red"></h:message>
+											<f:selectItem itemLabel="User" itemValue="USER" />
+											<f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<br></br>
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel for="add_activated" value="Activate ?" />
+										<p:selectOneRadio id="add_activated"
+											value="#{userMB.selectedUser.activated}" unselectable="true"
+											required="true" requiredMessage="It must be completed !">
+											<h:message for="add_activated" style="color:red"></h:message>
+											<f:selectItem itemLabel="Yes" itemValue="true" />
+											<f:selectItem itemLabel="No" itemValue="false" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<br></br>
+
+									<p:commandButton style="margin-top:10px" value="Update"
+										onclick="PF('dlguser').hide();" action="#{userMB.updateUser}">
+									</p:commandButton>
+								</h:form>
+							</h:panelGrid>
+
+						</p:outputPanel>
+					</p:dialog>
+
+				</h:form>
+				<!--  end print user's list -->
+
+				<br></br>
+
+
+
+
+				<!-- chercher par email -->
+				<h:form>
+					<legend style="color: white; font-weight: bold;"> Search
+						by Email</legend>
+<!-- 					<h:outputLabel value="Enter email : " style="color:white"></h:outputLabel> -->
+<p:outputLabel value="Enter email :" style="color:white" />
+<!-- 					<h:inputText value="#{userMB.email}"></h:inputText> -->
+<p:autoComplete  value="#{userMB.email}"
+						style="margin-left:20px" />
+					<br></br>
+
+					<h:commandButton value="Search"
+						action="#{userMB.readUserByEmail}" style="color:black"
+						rendered="#{userMB.see ne 'emailList'}"></h:commandButton>
+					<h:commandButton value="Close me !" action="#{userMB.closeList}"
+						style="color:red;" rendered="#{userMB.see eq 'emailList'}"></h:commandButton>
+
+				</h:form>
+				<p:outputPanel rendered="#{userMB.see eq 'emailList'}">
+					<p:panelGrid columns="2">
+						<f:facet name="header">
+
+						</f:facet>
+						<h:outputText value="Id:" />
+						<h:outputText value="#{userMB.selectedUser.id}" />
+
+						<h:outputText value="Name:" />
+						<h:outputText value="#{userMB.selectedUser.nom}" />
+
+						<h:outputText value="Email:" />
+						<h:outputText value="#{userMB.selectedUser.email}" />
+
+						<h:outputText value="Role:" />
+						<h:outputText value="#{userMB.selectedUser.role}" />
+
+						<h:outputText value="Activted:" />
+						<h:outputText value="#{userMB.selectedUser.activated}" />
+					</p:panelGrid>
+				</p:outputPanel>
+
+
+				<h:form>
+					<p:commandButton value="Update" type="button"
+						onclick="PF('dlgemail').show();"
+						rendered="#{userMB.see eq 'emailList'}">
+
+					</p:commandButton>
+
+
+					<!-- 	modal update user -->
+					<p:dialog header="Update" widgetVar="dlgemail" modal="true"
+						height="100%">
+
+						<p:outputPanel id="userDetail" style="margin-top:10px;border:none">
+
+							<h:panelGrid>
+								<h:form>
+									<p:outputLabel style="margin-top:10px" for="update_name"
+										value="Name : " />
+									<p:inputText style="margin-top:10px" id="update_name"
+										value="#{userMB.selectedUser.nom}" />
+
+									<br></br>
+
+									<p:outputLabel style="margin-top:10px" for="update_email"
+										value="Email : " />
+									<p:inputText style="margin-top:10px" id="update_email"
+										value="#{userMB.selectedUser.email}" />
+
+									<br></br>
+
+									<p:outputLabel style="margin-top:10px" for="update_password"
+										value="Password : " />
+									<p:inputText style="margin-top:10px" id="update_password"
+										value="#{userMB.selectedUser.pwd}" />
+
+									<br></br>
+									<br></br>
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel for="add_role" value="Type of account :" />
+										<p:selectOneRadio id="add_role"
+											value="#{userMB.selectedUser.role}" sunselectable="true"
+											required="true" requiredMessage="It must be completed !">
+											<h:message for="add_role" style="color:red"></h:message>
+											<f:selectItem itemLabel="User" itemValue="USER" />
+											<f:selectItem itemLabel="Admin" itemValue="ADMIN" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<br></br>
+									<h:panelGrid columns="2" cellpadding="5">
+										<p:outputLabel for="add_activated" value="Activate ?" />
+										<p:selectOneRadio id="add_activated"
+											value="#{userMB.selectedUser.activated}" unselectable="true"
+											required="true" requiredMessage="It must be completed !">
+											<h:message for="add_activated" style="color:red"></h:message>
+											<f:selectItem itemLabel="Yes" itemValue="true" />
+											<f:selectItem itemLabel="No" itemValue="false" />
+										</p:selectOneRadio>
+									</h:panelGrid>
+
+									<br></br>
+
+									<p:commandButton style="margin-top:10px" value="Update"
+										onclick="PF('dlgemail').hide();" action="#{userMB.updateUser}">
+									</p:commandButton>
+								</h:form>
+							</h:panelGrid>
+
+						</p:outputPanel>
+					</p:dialog>
+				</h:form>
+			</b:column>
+		</b:row>
+	</b:container>
+</h:body>
+</html>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>PrimeFlix</title>
+
+</head>
+<body>
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Movie's detail</h1>
+		</b:container>
+
+	</b:jumbotron>
+
+
+	<h:form>
+		<legend>Description</legend>
+		<p:panel id="singleFilm" header="#{listFilmMB.selectedFilm.nom}"
+			style="margin-bottom:20px;display:block;height:100%">
+			<h:panelGrid columns="4" cellpadding="10">
+				<p:graphicImage name="source image" alt="En cours de developpement" />
+				<br></br>
+				<h:outputText value="Language :" />
+				<h:outputText value="#{listFilmMB.selectedFilm.langue}" />
+				<br></br>
+				<h:outputText value="Duration :" />
+				<h:outputText value="#{listFilmMB.selectedFilm.duree}" />
+				<br></br>
+				<h:outputText value="Film maker :" />
+				<h:outputText value="#{listFilmMB.selectedFilm.realisateur.nomComplet}" />
+				<br></br>
+				<h:outputText value="" />
+				<p:dataTable id="liste_categorie"
+					value="#{listFilmMB.selectedFilm.categories}" var="x"
+					style="color:white">
+					<f:facet name="header">
+            List of categories: :
+        </f:facet>
+					<p:column headerText="Note">
+						<h:outputLabel value="#{x.nom}" />
+					</p:column>
+					<br></br>
+				</p:dataTable>
+				<br></br>
+
+
+
+
+				<p:dataTable id="liste_note"
+					value="#{listFilmMB.selectedFilm.notes}" var="x"
+					style="color:white">
+					<f:facet name="header">
+            List of notes :
+        </f:facet>
+					<p:column headerText="Note">
+						<h:outputLabel value="#{x.note}" />
+					</p:column>
+					<p:column headerText="Commentaire">
+						<h:outputLabel value="#{x.commentaire}" />
+					</p:column>
+					<br></br>
+				</p:dataTable>
+				<br></br>
+
+
+
+
+
+				<f:facet name="actions">
+					<h:commandLink
+						styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">
+						<h:outputText value="Ajouter au favoris" />
+					</h:commandLink>
+					<h:commandLink
+						styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default"
+						href="addNote.xhtml">
+						<h:outputText value="Mettre une note" />
+					</h:commandLink>
+				</f:facet>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

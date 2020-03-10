@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>PrimeFlix - Add Note</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+
+<h:body
+	style="padding-top: 50px; padding-bottom: 20px;background-color:black;color:white">
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Add Note</h1>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+
+
+		<b:row>
+
+			<b:column>
+				<h:form>
+
+					<p:outputLabel value="Note /5" for="id_note" />
+					<p:autoComplete id="id_note" required="true" value="#{addNoteMB.note}"
+						requiredMessage="Ce champs est obligatoire"
+						style="margin-left:20px" />
+
+					<br></br>
+					<br></br>
+
+					<p:outputLabel value="Comment" for="id_comment" />
+					<p:autoComplete id="id_comment" required="true"
+						value="#{addNoteMB.commentaire}"
+						requiredMessage="Ce champs est obligatoire"
+						style="margin-left:20px" />
+
+					<br></br>
+					<br></br>
+
+					<h:outputText value="Film"></h:outputText>
+					<p:selectOneRadio id="film" value="#{addNoteMB.film}"
+						layout="grid" columns="3">
+						<f:selectItems value="#{listFilmMB.listeFilms}" var="film"
+							itemLabel="#{film.nom}" itemValue="#{film.id}" />
+					</p:selectOneRadio>
+
+					<br></br>
+					<br></br>
+					
+					<p:commandButton value="Add note"
+						action="#{addNoteMB.addNote()}"
+						style="margin-right:20px;color:black"
+						styleClass="ui-priority-primary" />
+					<br></br>
+
+				</h:form>
+			</b:column>
+		</b:row>
+
+		<hr />
+		<footer>
+			<p>© PrimeFlix - 2020</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

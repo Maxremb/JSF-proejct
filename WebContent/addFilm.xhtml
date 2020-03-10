@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>PrimeFlix - Add Movies</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body
+	style="padding-top: 50px; padding-bottom: 20px;background-color:black;color:white">
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Add Movies</h1>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+
+
+		<b:row>
+
+			<b:column>
+				<h:form>
+					<!-- 			<h:outputText value="Nom"></h:outputText> -->
+
+					<p:outputLabel value="Nom" for="id_nom" />
+					<p:autoComplete id="id_nom" required="true" value="#{addFilmMB.nom}"
+						requiredMessage="Ce champs est obligatoire"
+						style="margin-left:20px" />
+
+
+
+					<!-- 					<h:inputText style="color:black" value="#{addFilmMB.nom}" -->
+					<!-- 						id="id_nom" required="true" -->
+					<!-- 						requiredMessage="Ce champ est obligatoire !"></h:inputText> -->
+					<!-- 					<h:message for="id_nom"></h:message> -->
+
+					<br></br>
+					<br></br>
+
+					<p:outputLabel value="Langue" for="id_langue" />
+					<p:autoComplete id="id_langue" required="true"
+						value="#{addFilmMB.langue}"
+						requiredMessage="Ce champs est obligatoire"
+						style="margin-left:20px" />
+
+					<!-- 					<h:outputText value="Langue"></h:outputText> -->
+					<!-- 					<h:inputText style="color:black" value="#{addFilmMB.langue}" -->
+					<!-- 						id="id_langue" required="true" -->
+					<!-- 						requiredMessage="Ce champ est obligatoire !"></h:inputText> -->
+					<!-- 					<h:message for="id_langue"></h:message> -->
+
+					<br></br>
+					<br></br>
+					
+					<p:outputLabel value="Durée" for="id_duree"/>
+      			  <p:autoComplete id="id_duree" required="true" value="#{addFilmMB.duree}" requiredMessage="Ce champs est obligatoire" style="margin-left:20px"  />
+
+<!-- 					<h:outputText value="Durée (en minutes)"></h:outputText> -->
+<!-- 					<h:inputText style="color:black" value="#{addFilmMB.duree}" -->
+<!-- 						id="id_duree" required="true" -->
+<!-- 						requiredMessage="Ce champ est obligatoire !"></h:inputText> -->
+<!-- 					<h:message for="id_duree"></h:message> -->
+
+					<br></br>
+					<br></br>
+
+					<h:outputText value="Catégorie(s)"></h:outputText>
+					<p:selectManyCheckbox id="cat" value="#{addFilmMB.categories}"
+						layout="grid" columns="3">
+						<f:selectItems value="#{listCatMB.categories}" var="cat"
+							itemLabel="#{cat.nom}" itemValue="#{cat.id}" />
+					</p:selectManyCheckbox>
+
+					<br></br>
+					<br></br>
+
+					<h:outputText value="Réalisateur"></h:outputText>
+					<p:selectOneRadio id="real" value="#{addFilmMB.realisateur}"
+						layout="grid" columns="3">
+						<f:selectItems value="#{listRealMB.realisateurs}" var="real"
+							itemLabel="#{real.nomComplet}" itemValue="#{real.id}" />
+					</p:selectOneRadio>
+
+					<br></br>
+					<br></br>
+					<p:commandButton value="Ajouter le film"
+						action="#{addFilmMB.addFilm}"
+						style="margin-right:20px;color:black"
+						styleClass="ui-priority-primary" />
+					<br></br>
+
+				</h:form>
+			</b:column>
+		</b:row>
+
+		<hr />
+		<footer>
+			<p>© PrimeFlix - 2020</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

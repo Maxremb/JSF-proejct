@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>PrimeFlix - Manage Film Maker</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body
+	style="padding-top: 50px; padding-bottom: 20px;background-color:black;color:white">
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Manage Film maker</h1>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+
+
+		<b:row>
+
+			<b:column>
+				<h:form>
+				<legend style="color:white">Add Film Maker</legend>
+<!-- 					<h:outputText value="Nom du nouveau réalisateur"></h:outputText> -->
+<p:outputLabel value="New Film Maker's name :"/>
+<!-- 					<h:inputText value="#{listRealMB.nom}" id="id_nom" required="true" -->
+<!-- 						requiredMessage="Ce champ est obligatoire !"></h:inputText> -->
+<p:autoComplete id="id_nom" required="true"
+						value="#{listRealMB.nom}"
+						requiredMessage="Ce champs est obligatoire"
+						style="margin-left:20px" />
+					<h:message for="id_nom"></h:message>
+
+					<h:commandButton value="Add Film Maker"
+						action="#{listRealMB.addReal}" style="margin-left:20px;color:black;height:33px"></h:commandButton>
+					<br></br>
+				</h:form>
+
+				<br></br>
+
+<!-- 				<h:outputText value="Modifier ou supprimer un réalisateur"></h:outputText> -->
+				<br></br>
+
+				<h:form id="form">
+<legend style="color:white">Update or delete Film Maker</legend>
+					<p:growl id="msgs" showDetail="true" />
+
+					<p:dataTable id="reals1" var="real"
+						value="#{listRealMB.realisateurs}" editable="true"
+						style="margin-bottom:20px;width:900px">
+<!-- 						<f:facet name="header"> -->
+<!--             Modifier ou Supprimer un réalisateur -->
+<!--        		 </f:facet> -->
+
+						<p:ajax event="rowEdit" listener="#{listRealMB.onRowEdit(real)}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel" listener="#{listRealMB.onRowCancel}"
+							update=":form:msgs" />
+
+						<p:column headerText="Name">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{real.nomComplet}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText id="modelInput" value="#{real.nomComplet}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Movies">
+							<h:outputText value="#{real.films}" />
+						</p:column>
+						<p:column headerText="Delete" style="width:135px">
+							<p:commandButton value="Supprimer"
+								action="#{listRealMB.suppReal(real)}"></p:commandButton>
+						</p:column>
+						<p:column style="width:35px">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
+			</b:column>
+		</b:row>
+
+		<hr />
+		<footer>
+			<p>© PrimeFlix - 2020</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

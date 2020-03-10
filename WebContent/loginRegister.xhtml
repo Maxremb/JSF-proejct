@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>PrimeFlix</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body style="padding-bottom: 20px;background-color:black;color:white">
+
+	<b:jumbotron style="background-color:black">
+		<b:container>
+			<h1 style="color: white">PrimeFlix</h1>
+			<p>Unlimited movies, TV shows, and more. Watch anywhere. Cancel
+				anytime.</p>
+			<p>
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:commandButton value="Log in" type="button"
+						onclick="PF('dlg2').show();"
+						style="background-color:#850606;color:black;width:100px" />
+				</h:panelGrid>
+
+				<p:dialog header="Log in" widgetVar="dlg2" modal="true"
+					height="200px">
+					<h:form>
+						<p:growl id="growl" />
+
+						<p:panel id="pnl" style="margin-top:10px;border:none">
+							<p:messages id="messages" />
+							<h:panelGrid columns="3" id="grid" cellpadding="5">
+								<p:outputLabel style="margin-top:10px" 
+									value="Email:" />
+								<p:inputText style="margin-top:10px" id="email_login"
+									value="#{loginMB.email}" requiredMessage="Wrong email !"
+						required="true"  />
+								<p:message for="email_login" showDetail="true" closable="true" />
+								<p:outputLabel style="margin-top:10px" for="pwd"
+									value="Password:" />
+								<p:inputText style="margin-top:10px" id="pwd"
+									value="#{loginMB.pwd}" requiredMessage="Wrong password !"
+						required="true" />
+								<p:message for="pwd" />
+							</h:panelGrid>
+
+							<p:commandButton style="margin-top:10px" value="Log in"
+								action="#{loginMB.login}"/>
+						</p:panel>
+
+						<p:spotlight target="pnl" widgetVar="spot" />
+					</h:form>
+				</p:dialog>
+				<br></br>
+				<h:panelGrid columns="1" cellpadding="5">
+					<p:commandButton value="Sign in" type="button"
+						onclick="PF('dlg1').show();"
+						style="background-color:#850606;color:black;width:100px" />
+				</h:panelGrid>
+
+				<p:dialog header="Sign in" widgetVar="dlg1" modal="true"
+					height="200px">
+					<h:form>
+						<p:growl id="growl" />
+
+						<p:panel id="pnl" style="margin-top:10px;border:none">
+							<p:messages id="messages" />
+							<h:panelGrid columns="3" id="grid" cellpadding="5">
+								<p:outputLabel style="margin-top:10px" for="name"
+									value="First name" />
+								<p:inputText style="margin-top:10px" id="name"
+									value="#{registerMB.nom}" required="true">
+								</p:inputText>
+								<p:message for="name" />
+								<p:outputLabel style="margin-top:10px" for="email"
+									value="Email:" />
+								<p:inputText style="margin-top:10px" id="email"
+									value="#{registerMB.email}" required="true" />
+								<p:message for="email" />
+								<p:outputLabel style="margin-top:10px" for="pwd"
+									value="Password:" />
+								<p:inputText style="margin-top:10px" id="pwd"
+									value="#{registerMB.pwd}" required="true" />
+								<p:message for="pwd" />
+							</h:panelGrid>
+
+							<p:commandButton style="margin-top:10px" value="Sign in"
+								action="#{registerMB.register}" />
+						</p:panel>
+
+						<p:spotlight target="pnl" widgetVar="spot" />
+					</h:form>
+				</p:dialog>
+			</p>
+			<img style="margin-left: 150px; height: 350px"
+				src="https://www.avoir-alire.com/IMG/jpg/voyoucratie-2.jpg"></img>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+		<b:row>
+			<b:column col-md="4">
+				<h2>Enjoy on your TV.</h2>
+				<p>Watch on Smart TVs, Playstation, Xbox, Chromecast, Apple TV,
+					Blu-ray players, and more.</p>
+				<p></p>
+			</b:column>
+			<b:column col-md="4">
+				<h2>Download your shows to watch on the go.</h2>
+				<p>Save your data and watch all your favorites offline.</p>
+				<p></p>
+			</b:column>
+			<b:column col-md="4">
+				<h2>Watch everywhere.</h2>
+				<p>Stream unlimited movies and TV shows on your phone, tablet,
+					laptop, and TV without paying more.</p>
+				<p></p>
+			</b:column>
+		</b:row>
+		<hr />
+		<footer>
+			<p>© PrimeFlix - 2020</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

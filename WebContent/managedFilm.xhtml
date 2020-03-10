@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>PrimeFlix - Manage Films</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body
+	style="padding-top: 50px; padding-bottom: 20px;background-color:black;color:white">
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Manage Films</h1>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+
+
+		<b:row>
+
+			<b:column>
+
+				<h:form id="form">
+<legend style="color:white">Update or delete Films</legend>
+					<p:growl id="msgs" showDetail="true" />
+
+					<p:dataTable id="test" var="film"
+						value="#{listFilmMB.listeFilms}" editable="true"
+						style="margin-bottom:20px;width:900px">>
+
+						<p:ajax event="rowEdit" listener="#{listFilmMB.onRowEdit(film)}"
+							update=":form:msgs" />
+						<p:ajax event="rowEditCancel" listener="#{listFilmMB.onRowCancel}"
+							update=":form:msgs" />
+
+						<p:column headerText="Name">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{film.nom}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{film.nom}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Language">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{film.langue}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{film.langue}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Duration">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{film.duree}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{film.duree}"
+										style="width:100%" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+						<p:column headerText="Categories">
+							<h:outputText value="#{film.categories}" />
+						</p:column>
+						<p:column headerText="Realisateur">
+							<h:outputText value="#{film.realisateur}" />
+						</p:column>
+						<p:column headerText="Delete" style="width:135px">
+							<p:commandButton value="Supprimer"
+								action="#{listFilmMB.suppFilm(film)}"></p:commandButton>
+						</p:column>
+						<p:column style="width:35px">
+							<p:rowEditor />
+						</p:column>
+					</p:dataTable>
+
+				</h:form>
+			</b:column>
+		</b:row>
+
+		<hr />
+		<footer>
+			<p>© PrimeFlix - 2020</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

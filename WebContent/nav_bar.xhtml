@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>PrimeFlix - Home</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body
+	style="padding-top: 50px; padding-bottom: 20px;background-color:black;color:black">
+
+	<b:navBar brand="PrimeFlix" brandHref="index.xhtml" inverse="true"
+		fixed="top">
+		<b:navbarLinks>
+			<b:navLink value="Movies" href="index.xhtml"></b:navLink>
+			<b:dropMenu value="Series">
+				<b:navLink value="In developpement" href="#"></b:navLink>
+			</b:dropMenu>
+			<b:dropMenu value="Account">
+				<b:navLink value="My account" href="managedAccount.xhtml"></b:navLink>
+				<b:navLink value="Add note" href="addNote.xhtml"></b:navLink>
+				<h:form>
+					<b:commandButton action="#{loginMB.deco}" value="Disconnect"
+						style="margin-left:5%;border:none"></b:commandButton>
+				</h:form>
+			</b:dropMenu>
+			<b:dropMenu value="#{msg['language']}">
+				<h:form>
+					<b:commandButton action="#{langueMB.change('fr')}" value="Français" style="border:none"></b:commandButton>
+					<b:commandButton action="#{langueMB.change('en')}" value="English" style="border:none"></b:commandButton>
+				</h:form>
+			</b:dropMenu>
+			<b:dropMenu value="Admin" rendered="#{loginMB.user.role != 'USER'}">
+				<b:navLink value="User Manage" href="managed_user.xhtml"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink value="Categories Manage" href="managedCat.xhtml"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink value="Film maker Manage" href="managedReal.xhtml"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink value="Movies Manage" href="addFilm.xhtml"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+	</b:navBar>
+</h:body>
+</html>

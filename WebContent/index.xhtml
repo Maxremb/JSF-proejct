@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>PrimeFlix - Home</title>
+	<meta name="author" content="The Author"></meta>
+</h:head>
+<!-- Add 50px padding top to the body for the navbar -->
+<h:body
+	style="padding-top: 50px; padding-bottom: 20px;background-color:black;color:white">
+
+	<ui:include src="/nav_bar.xhtml" />
+
+	<b:jumbotron>
+		<b:container>
+			<h1 style="color: black">Movies</h1>
+		</b:container>
+
+	</b:jumbotron>
+	<b:container>
+
+
+		<b:row>
+
+			<b:column col-md="4">
+				<h:form>
+					<p>
+						<!-- <h:outputLabel for="research_name" value="#{msg['research_name']}"></h:outputLabel> -->
+						<p:outputLabel style="color:white" value="#{msg['research_name']}"
+							for="research_name" />
+						<!-- <h:inputText id="research_name" value="#{listFilmMB.nom}" -->
+						<!-- style="color:black"></h:inputText> -->
+						<p:autoComplete id="research_name" value="#{listFilmMB.nom}"
+							style="margin-left:20px" />
+						<b:commandButton value="#{msg['research']}"
+							action="#{listFilmMB.listFilmsParNom}"
+							style="margin-left:15px;height:30px" />
+					</p>
+				</h:form>
+			</b:column>
+
+			<b:column col-md="4">
+				<h:form>
+					<p>
+						<!-- <h:outputLabel for="research_real" value="#{msg['research_real']}"></h:outputLabel> -->
+						<p:outputLabel style="color:white" value="#{msg['research_real']}"
+							for="research_real" />
+						<!-- 						<h:inputText id="research_real" value="#{listFilmMB.realisateur}" -->
+						<!-- 							style="color:black"></h:inputText> -->
+						<p:autoComplete id="research_real"
+							value="#{listFilmMB.realisateur}" />
+						<b:commandButton value="#{msg['research']}"
+							action="#{listFilmMB.listFilmsParReal}"
+							style="margin-left:15px;height:30px" />
+					</p>
+				</h:form>
+			</b:column>
+
+			<b:column col-md="4">
+				<h:form>
+					<p>
+						<h:outputLabel for="research_cat" value="#{msg['research_cat']}"></h:outputLabel>
+						<p:selectOneRadio id="research_cat"
+							value="#{listFilmMB.categorie}" layout="grid" columns="3">
+							<f:selectItems value="#{listCatMB.categories}" var="cat"
+								itemLabel="#{cat.nom}" itemValue="#{cat.nom}" />
+						</p:selectOneRadio>
+						<b:commandButton value="#{msg['research']}"
+							action="#{listFilmMB.listFilmsParCat}"
+							style="margin-left:275px;height:30px" />
+					</p>
+				</h:form>
+			</b:column>
+
+		</b:row>
+		<b:row>
+			<p:dataTable value="#{listFilmMB.listeFilms}" var="film">
+				<p:column headerText="Nom" style="width:200px">
+					<h:outputText value="#{film.nom}"></h:outputText>
+				</p:column>
+				<p:column headerText="Durée" style="width:100px">
+					<h:outputText value="#{film.duree}"></h:outputText>
+				</p:column>
+				<p:column headerText="Langue" style="width:100px">
+					<h:outputText value="#{film.langue}"></h:outputText>
+				</p:column>
+				<p:column headerText="Réalisateur">
+					<h:outputText value="#{film.realisateur}"></h:outputText>
+				</p:column>
+				<p:column headerText="Catégorie(s)" style="width:200px">
+
+					<p:dataList value="#{film.categories}" var="cat"
+						style="border:none">
+						<h:outputText value="#{cat.nom}"></h:outputText>
+					</p:dataList>
+
+				</p:column>
+				<p:column headerText="Voir film" style="width:100px">
+					<h:form>
+						<h:commandButton value="Film"
+							action="#{listFilmMB.setSelectedFilm(film)}" />
+					</h:form>
+				</p:column>
+			</p:dataTable>
+
+
+		</b:row>
+
+
+
+		<hr />
+		<footer>
+			<p>© PrimeFlix - 2020</p>
+		</footer>
+	</b:container>
+
+</h:body>
+</html>

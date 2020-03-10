@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+	version="2.2">
+
+	<application>
+		<locale-config>
+			<default-locale>en</default-locale>
+			<supported-locale>fr</supported-locale>
+		</locale-config>
+		<resource-bundle>
+			<base-name>messages</base-name>
+			<var>msg</var>
+		</resource-bundle>
+	</application>
+
+	<managed-bean>
+		<managed-bean-name>userMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.UserMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>accountMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.AccountMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>loginMB</property-name>
+			<value>#{loginMB}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>singleMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.SingleMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>listFilmMB</property-name>
+			<value>#{listFilmMB}</value>
+		</managed-property>
+	</managed-bean>
+
+
+	<managed-bean>
+		<managed-bean-name>addFilmMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.AddFilmMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>addNoteMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.AddNoteMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>loginMB</property-name>
+			<value>#{loginMB}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>addCatMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.AddCatMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>addRealMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.AddRealMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>listCatMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.ListCatMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>listRealMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.ListRealMB</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>loginMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.LoginMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>langueMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.LanguageMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>listFilmMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.ListFilmMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>registerMB</managed-bean-name>
+		<managed-bean-class>com.fr.adaming.managedBean.RegisterMB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<navigation-rule>
+		<from-view-id>loginRegister.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>SUCCESS</from-outcome>
+			<to-view-id>index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>FAIL</from-outcome>
+			<to-view-id>loginRegister.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+
+
+	<navigation-rule>
+		<from-view-id>index.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>DECO</from-outcome>
+			<to-view-id>loginRegister.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+
+	<navigation-rule>
+		<from-view-id>addFilm.xhtml</from-view-id>
+		<navigation-case>
+			<from-outcome>redirectself</from-outcome>
+			<to-view-id>addFilm.xhtml</to-view-id>
+			<redirect>
+			</redirect>
+		</navigation-case>
+	</navigation-rule>
+
+
+</faces-config>
